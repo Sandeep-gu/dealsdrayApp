@@ -25,7 +25,7 @@ function App() {
 						/>
 						<Route path="register" element={<Register />} />
 						<Route path="employeelist" element={<EmployeeList />} />
-						<Route path="employeeedit" element={<EmployeeEdit />} />
+						<Route path="employeeedit/:id" element={<EmployeeEdit />} />
 						<Route path="createemployee" element={<CreateEmployee />} />
 						<Route
 							path="dashboard"
