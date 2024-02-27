@@ -1,22 +1,43 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./page/Login";
 import Register from "./page/Register";
+import Layout from "./components/Layout";
+import EmployeeEdit from "./page/EmployeeEdit";
+import EmployeeList from "./page/EmployeeList";
+import Dashboard from "./page/Dashboard";
+import { useContext } from "react";
+import { GlobalContext } from "./context/ContextProvider";
+import CreateEmployee from "./page/CreateEmployee";
 
 function App() {
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+	const { loggedIn } = useContext(GlobalContext);
+	return (
+		<>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<Layout />}>
+						<Route
+							path=""
+							element={
+								loggedIn ? <Navigate to="/dashboard"></Navigate> : <Login />
+							}
+						/>
+						<Route path="register" element={<Register />} />
+						<Route path="employeelist" element={<EmployeeList />} />
+						<Route path="employeeedit" element={<EmployeeEdit />} />
+						<Route path="createemployee" element={<CreateEmployee />} />
+						<Route
+							path="dashboard"
+							element={
+								loggedIn ? <Dashboard /> : <Navigate to="/" replace></Navigate>
+							}
+						/>
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</>
+	);
 }
 
 export default App;
