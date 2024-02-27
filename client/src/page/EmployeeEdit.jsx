@@ -1,7 +1,9 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 
 const EmployeeEdit = () => {
-	return <div>EmployeeEdit</div>;
+	const { id } = useParams();
+	return <div>EmployeeEdit : {id}</div>;
 };
 
 export default EmployeeEdit;
